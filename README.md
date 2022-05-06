@@ -49,8 +49,8 @@ As this is your final exam, I expect that you have acquired the necessary skills
 
 For this exam, you will be writing the second half of a client/server pair that will communicate over Unix sockets. The pair is:
 
-1. File Server - A file server is a program that hosts files for clients. It receives files that clients want to store, and sends them back to the client (or other clients) when they are requested. This is what you will be writing for this assignment. An example file server has been provided for you in the Homework 9 repository. You can use it as a reference for this exam.
-2. Client - This program connects to the server and can send files to it, which will be stored on the file server. The client can also request files from the file server. An example client implementation has already been provided for you in Homework 9. You may use any of your work from Homework 9 for this exam, but if you do so, cite it.
+1. File Server - A file server is a program that hosts files for clients. It receives files that clients want to store, and sends them back to the client (or other clients) when they are requested. This is what you will be writing for this assignment. An example file server has been provided for you in the Homework 8 repository. You can use it as a reference for this exam.
+2. Client - This program connects to the server and can send files to it, which will be stored on the file server. The client can also request files from the file server. An example client implementation has already been provided for you in Homework 8. You may use any of your work from Homework 8 for this exam, but if you do so, cite it.
 
 ## Part 2 - File Server
 

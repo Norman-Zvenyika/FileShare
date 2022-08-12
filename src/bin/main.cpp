@@ -52,6 +52,10 @@ int main(int argc, char** argv) {
     }
 
     //check if host name is present
+    if(hostNamePresent == false) {
+        cout << "Error. Hostname not found" << endl;
+        exit(1);
+    }
 
     //create sockets
 

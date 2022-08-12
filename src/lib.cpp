@@ -114,3 +114,11 @@ u64 pack109::deserialize_u64(vec bytes) {
     throw;
   }
 }
+
+//i8 serialize
+vec pack109::serialize(i8 item) {
+  vec bytes;
+  bytes.push_back(PACK109_I8);
+  bytes.push_back((u8)item);   //size of i8 is 1 byte, which is equivalent to u8
+  return bytes;
+}

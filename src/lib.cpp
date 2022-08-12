@@ -122,3 +122,13 @@ vec pack109::serialize(i8 item) {
   bytes.push_back((u8)item);   //size of i8 is 1 byte, which is equivalent to u8
   return bytes;
 }
+
+//i8 deserialize
+i8 pack109::deserialize_i8(vec bytes) {
+  if (bytes[0] == PACK109_I8) {
+    return (i8)bytes[1];
+  } 
+  else {
+    throw;
+  }
+}

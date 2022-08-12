@@ -483,3 +483,22 @@ vec pack109::serialize(std::vector<string> item) {
   }
   return bytes;
 }
+
+//deserialize string
+std::vector<string> pack109::deserialize_vec_string(vec bytes) {
+  std::vector<string> result;
+  if(bytes[0] == PACK109_A8) {
+    for(int i= 2; i <(bytes[1]*2)+9; i +=2) {
+      string element = deserialize_string(slicing(bytes,i,i+9));
+      result.push_back(element);
+    }
+  }
+  else if(bytes[0] == PACK109_A16) {
+    int bytesLength = 9 * (int)((bytes[1] << 8) | bytes[2]);
+    for(int i = 2; i < bytesLength+2; i+=2) {
+      string element = deserialize_string(slicing(bytes, i+1, i+9));
+      result.push_back(element);
+    }
+  }
+  return result;
+}

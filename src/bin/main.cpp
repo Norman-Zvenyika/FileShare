@@ -233,13 +233,10 @@ int main(int argc, char** argv) {
         }
     }
     else {
-        //if it's the file
-
-        //store the file
-
-        //decrypt file contents
+        //if it's the file, store the file
 
         //deserialize the decrypted vector
+        struct File deserializedFile = deserialize_file(decrypted);
 
         //write to a file and store it in the received folder
 

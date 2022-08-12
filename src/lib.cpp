@@ -69,3 +69,20 @@ vec pack109::serialize(u32 item){
   }
   return bytes;
 }
+
+//u32 deserialization
+u32 pack109::deserialize_u32(vec bytes) {
+  u32 result = 0;
+  if (bytes[0] == PACK109_U32){
+    int j = (sizeof(u32) * 2) - 2;
+    for (int i = 1; i <= sizeof(u32); i++){
+      u32 shifted = (u32)bytes[i] << j * 4;
+      result = result | shifted;
+      j -= 2;
+    }
+    return result;
+  }
+  else{
+    throw;
+  }
+}

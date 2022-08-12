@@ -56,3 +56,16 @@ u8 pack109::deserialize_u8(vec bytes){
     throw;
   }
 }
+
+// u32 serialization
+vec pack109::serialize(u32 item){
+  vec bytes; // 1 tag byte + 4 int byes
+  bytes.push_back(PACK109_U32);
+  int i = (sizeof(u32) * 2) - 2;
+  for (i; i >= 0; i -= 2){
+    int shift = (item >> i * 4);
+    u8 byte = shift & 0x000000FF;
+    bytes.push_back((u8)byte);
+  }
+  return bytes;
+}

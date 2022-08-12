@@ -97,3 +97,20 @@ vec pack109::serialize(u64 item) {
   }
   return bytes;
 }
+
+//u64 deserialize
+u64 pack109::deserialize_u64(vec bytes) {
+  u64 result = 0;
+  if(bytes[0] == PACK109_U64) {
+    int posOfByte = 1;
+    for(int i=7; i>=0; i--) {
+      u64 shifted = (u64)(bytes[posOfByte]) << (8*i);
+      result = result | shifted;
+      posOfByte++;
+    }
+    return result;
+  }
+  else {
+    throw;
+  }
+}

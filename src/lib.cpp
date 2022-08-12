@@ -19,3 +19,19 @@ vec pack109::serialize(bool item)
   }
   return bytes;
 }
+
+//bool deserialization
+bool pack109::deserialize_bool(vec bytes){
+  if (bytes.size() < 1){
+    throw;
+  }
+  if (bytes[0] == PACK109_TRUE){
+    return true;
+  }
+  else if (bytes[0] == PACK109_FALSE){
+    return false;
+  }
+  else{
+    throw;
+  }
+}

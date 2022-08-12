@@ -583,6 +583,16 @@ struct File pack109::deserialize_fileRequest(vec bytes) {
   return requestedFile;
 }
 
+//checkType (confirms if its a file or not)
+bool pack109::isFile(vec bytes) {
+  vec type = slicing(bytes,2,7);
+  string typeValue = deserialize_string(type);
+  if(typeValue=="File") {
+    return true;
+  }
+  return false;
+}
+
 //printVec function
 void pack109::printVec(vec &bytes){
   printf("[ ");

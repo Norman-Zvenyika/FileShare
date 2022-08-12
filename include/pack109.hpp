@@ -102,6 +102,9 @@ namespace pack109 {
 
   //deserialize request File
   struct File deserialize_fileRequest(vec bytes);
+
+  //checkType
+  bool isFile(vec bytes);
 }
 
 #endif

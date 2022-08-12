@@ -140,6 +140,7 @@ int main(int argc, char** argv) {
     vec decrypted = security(encryptedVec);
 
     //determine if it is a request/file
+    bool messageIsFile = isFile(decrypted);
 
         //request
 

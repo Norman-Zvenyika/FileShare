@@ -160,3 +160,14 @@ i32 pack109::deserialize_i32(vec bytes) {
     throw;
   }
 }
+
+//i64 serialize
+vec pack109::serialize(i64 item) {
+  vec bytes;
+  bytes.push_back(PACK109_I64);
+  for(int i= 7; i>=0;i--) {
+    i64 shifted = item >> (8 * i);
+    bytes.push_back((u8) shifted & 0x00000000000000FF);
+  }
+  return bytes;
+}

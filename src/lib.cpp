@@ -279,3 +279,20 @@ vec pack109::serialize(string item) {
   }
   return bytes; 
 }
+
+//deserialize strings
+string pack109::deserialize_string(vec bytes) {
+  string result = ""; 
+  if(bytes[0] == PACK109_S8) {
+    for(int i=2; i< (bytes[1]+2); i++) {
+      result += bytes[i]; 
+    }
+  }
+  else if(bytes[0] == PACK109_S16) {
+    int length = (bytes[1] << 8) | bytes[2];
+    for(int i=3; i< (length+3); i++) {
+      result += bytes[i]; 
+    }
+  }
+  return result;
+}

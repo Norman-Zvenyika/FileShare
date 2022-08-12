@@ -13,6 +13,17 @@
 
 using namespace pack109;
 using namespace std;
+#define KEY 42;
+
+// Encrypt/Decrypt text
+vec security(vec bytes) {
+    vec secure;
+    for (int i=0; i<bytes.size(); i++){
+        unsigned char c = bytes[i] ^ KEY;
+        secure.push_back(c);
+	}
+    return secure;
+}
 
 // for string delimiter
 //https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
@@ -118,18 +129,19 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    //store the bytes
+    //store the bytes received
     for(int i=0; i<strlen(buffer); i++) {
         encryptedVec.push_back(buffer[i]);
     }
 
-    //store the bytes received
+    cout << "Reading " << encryptedVec.size() << " bytes." << endl;
 
     //determine if it is a request/file
 
         //request
 
         //decrypt the request
+        vec decryptedRequest = security(encryptedVec);
 
         //deserialize the request
 

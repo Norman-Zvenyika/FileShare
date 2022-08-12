@@ -136,15 +136,15 @@ int main(int argc, char** argv) {
 
     cout << "Reading " << encryptedVec.size() << " bytes." << endl;
 
+    //decrypt received bytes
+    vec decrypted = security(encryptedVec);
+
     //determine if it is a request/file
 
         //request
 
-        //decrypt the request
-        vec decryptedRequest = security(encryptedVec);
-
         //deserialize the request
-        struct File requestedFile = deserialize_fileRequest(decryptedRequest);
+        struct File requestedFile = deserialize_fileRequest(decrypted);
         
         //get the name of the file
 

@@ -230,3 +230,21 @@ vec pack109::serialize(f64 item) {
   }
   return bytes;
 }
+
+//f64 deserialize
+f64 pack109::deserialize_f64(vec bytes) {
+  u64 result = 0;
+  if(bytes[0] == PACK109_F64) {
+    int posOfByte = 1;
+    for(int i=7; i>=0; i--) {
+      u64 shifted = (u64)(bytes[posOfByte]) << (8*i);
+      result = result | shifted;
+      posOfByte++;
+    }
+    f64 *f64Pointer = (f64*) (&result);
+    return *f64Pointer;
+  }
+  else {
+    throw;
+  }
+}

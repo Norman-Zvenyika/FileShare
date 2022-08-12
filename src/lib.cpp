@@ -502,3 +502,10 @@ std::vector<string> pack109::deserialize_vec_string(vec bytes) {
   }
   return result;
 }
+
+//method for pushing bytes to the original bytes vector
+void pushBytes(vec *ogVec, vec addBytes) {
+  for(int i=0; i<addBytes.size(); i++) {
+    ogVec->push_back(addBytes[i]);
+  }
+}

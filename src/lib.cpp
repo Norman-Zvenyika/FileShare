@@ -569,3 +569,12 @@ struct File pack109::deserialize_file(vec bytes) {
   newFile.bytes = fileBytes;
   return newFile;
 }
+
+//printVec function
+void pack109::printVec(vec &bytes){
+  printf("[ ");
+  for (int i = 0; i < bytes.size(); i++){
+    printf("%x ", bytes[i]);
+  }
+  printf("]\n");
+}

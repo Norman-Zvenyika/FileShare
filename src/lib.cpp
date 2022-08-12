@@ -143,3 +143,20 @@ vec pack109::serialize(i32 item) {
   }
   return bytes;
 }
+
+//i32 deserialize
+i32 pack109::deserialize_i32(vec bytes) {
+  i32 result = 0;
+  if(bytes[0] == PACK109_I32) {
+    int posOfByte = 1;
+    for(int i=3; i>=0; i--) {
+      i32 shifted = (u64)(bytes[posOfByte]) << (8*i);
+      result = result | shifted;
+      posOfByte++;
+    }
+    return result;
+  }
+  else {
+    throw;
+  }
+}

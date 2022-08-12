@@ -15,6 +15,16 @@ using namespace pack109;
 using namespace std;
 #define KEY 42;
 
+//write to a file
+void write(vec bytes, char const* filename) {
+  FILE *pFile;
+  pFile = fopen(filename, "wb");
+  for(int i=0; i<bytes.size(); i++) {
+    fputc(bytes[i], pFile);
+  }
+  fclose(pFile);
+}
+
 //readBinary File
 void read(vector<unsigned char> *bytes, char const* filename) {
   FILE *pFile;

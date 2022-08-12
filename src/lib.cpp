@@ -408,3 +408,31 @@ std::vector<u64> pack109::deserialize_vec_u64(vec bytes) {
   }
   return result;
 }
+
+//serialize vector f64
+vec pack109::serialize(std::vector<f64> item) {
+  vec bytes;
+  if(item.size() < 256) {
+    bytes.push_back(PACK109_A8);
+    bytes.push_back((u8)item.size());
+    for(int i=0; i<item.size(); i++) {
+      vec element = serialize(item[i]);
+      for(int j=0; j<element.size(); j++) {
+        bytes.push_back(element[j]);
+      }
+    }
+  }
+  else if(item.size() < 65536) {
+    bytes.push_back(PACK109_A16);
+    u32 stringLength = (u32)item.size();
+    bytes.push_back((u8)(stringLength >> 8));
+    bytes.push_back((u8)(stringLength));
+    for(int i=0; i<item.size(); i++) {
+      vec element = serialize(item[i]);
+      for(int j=0; j<element.size(); j++) {
+        bytes.push_back(element[j]);
+      }
+    }
+  }
+  return bytes;
+}

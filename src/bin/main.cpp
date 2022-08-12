@@ -15,6 +15,27 @@ using namespace pack109;
 using namespace std;
 #define KEY 42;
 
+//readBinary File
+void read(vector<unsigned char> *bytes, char const* filename) {
+  FILE *pFile;
+  int c;
+  pFile = fopen (filename,"rb");
+  if (pFile==NULL) {
+    perror ("Error opening file");
+  }
+  else {
+    while(1) {
+      c = fgetc (pFile);
+      if(c==EOF) {
+        break;
+      }
+      bytes->push_back(c);
+    }
+    fclose (pFile);
+  }
+}
+
+
 //https://www.tutorialspoint.com/the-best-way-to-check-if-a-file-exists-using-standard-c-cplusplus
 //check if file exists in received
 bool checkFile (string name) {

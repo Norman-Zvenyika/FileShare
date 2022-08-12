@@ -218,3 +218,15 @@ f32 pack109::deserialize_f32(vec bytes){
     throw;
   }
 }
+
+//f64 serialization
+vec pack109::serialize(f64 item) {
+  vec bytes;
+  u64* f64Item = (u64*) (&item);
+  bytes.push_back(PACK109_F64);
+  for(int i= 7; i>=0;i--) {
+    u64 shifted = *f64Item  >> (8 * i);
+    bytes.push_back((u8) shifted & 0x00000000000000FF);
+  }
+  return bytes;
+}

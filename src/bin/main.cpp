@@ -15,6 +15,18 @@ using namespace pack109;
 using namespace std;
 #define KEY 42;
 
+//https://www.tutorialspoint.com/the-best-way-to-check-if-a-file-exists-using-standard-c-cplusplus
+//check if file exists in received
+bool checkFile (string name) {
+    string path = "received/" + name;
+    ifstream myfile;
+    myfile.open(path);
+    if(myfile) {
+        return true;
+    }
+    return false;
+}
+
 // Encrypt/Decrypt text
 vec security(vec bytes) {
     vec secure;
@@ -142,14 +154,19 @@ int main(int argc, char** argv) {
     //determine if it is a request/file
     bool messageIsFile = isFile(decrypted);
 
+    if(messageIsFile==0) {
         //request
 
         //deserialize the request
         struct File requestedFile = deserialize_fileRequest(decrypted);
         
         //get the name of the file
+        string requestedFileName = requestedFile.name;
+
+        cout << "Received Request: \"" << requestedFileName << "\"" << endl;
 
         //check if file exists
+        bool fileExists = checkFile(requestedFileName);
 
         //if file exists
 
@@ -166,8 +183,9 @@ int main(int argc, char** argv) {
         //doesn't exist
 
             //notify the client
-    
-    //if it's the file
+    }
+    else {
+        //if it's the file
 
         //store the file
 
@@ -177,5 +195,7 @@ int main(int argc, char** argv) {
 
         //write to a file and store it in the received folder
 
+    }
+    
     return 0;
 }

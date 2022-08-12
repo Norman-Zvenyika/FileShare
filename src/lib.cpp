@@ -324,3 +324,21 @@ vec pack109::serialize(std::vector<u8> item) {
   }
   return bytes;
 }
+
+//https://www.geeksforgeeks.org/slicing-a-vector-in-c/#:~:text=Slicing%20a%20vector%20means%20to,Y%20in%20a%20given%20vector.
+// Function to slice a given vector
+// from range X to Y
+vec slicing(vec &arr, int x, int y) {
+  // Starting and Ending iterators
+  auto start = arr.begin() + x;
+  auto end = arr.begin() + y + 1;
+
+  //To store the sliced vector
+  vec result(y-x+1);
+
+  //Copy vector using copy function()
+  copy(start, end, result.begin());
+
+  // Return the final sliced vector
+  return result;
+}

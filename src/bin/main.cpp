@@ -238,7 +238,13 @@ int main(int argc, char** argv) {
         //deserialize the decrypted vector
         struct File deserializedFile = deserialize_file(decrypted);
 
+        cout << "Received File: \"" << deserializedFile.name << "\"" << endl;
+
         //write to a file and store it in the received folder
+        string writeToFile = "received/"+deserializedFile.name;
+        char receivedFileName[deserializedFile.name.length()+1];
+        strcpy(receivedFileName, writeToFile.c_str());
+        write(deserializedFile.bytes, receivedFileName);
 
     }
     

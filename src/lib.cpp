@@ -171,3 +171,20 @@ vec pack109::serialize(i64 item) {
   }
   return bytes;
 }
+
+//i64 deserialize
+i64 pack109::deserialize_i64(vec bytes) {
+  i64 result = 0;
+  if(bytes[0] == PACK109_I64) {
+    int posOfByte = 1;
+    for(int i=7; i>=0; i--) {
+      i64 shifted = (i64)(bytes[posOfByte]) << (8*i);
+      result = result | shifted;
+      posOfByte++;
+    }
+    return result;
+  }
+  else {
+    throw;
+  }
+}

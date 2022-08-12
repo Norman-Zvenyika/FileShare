@@ -11,9 +11,18 @@ using namespace std;
 
 int main(int argc, char** argv) {
     //declare variables
+    bool hostNamePresent = false;
+    string address = "";
+    string portString = "";
+    int port = 0;
 
     //terminate if less than 2 arguments are given
-
+    if (argc < 2) {
+        cout << "Error: Expected mode" << endl;
+        cout << "Usage: --hostname address:port" << endl;
+        exit(1);
+    }
+    
     //parse the input arguments
 
     //check if host name is present

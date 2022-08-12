@@ -171,7 +171,12 @@ int main(int argc, char** argv) {
         if(fileExists==1) {
 
             //open file and read in memory
-
+            string pathName = "received/" + requestedFileName;
+            vec fileBytes;
+            char filename [pathName.length()+1];
+            strcpy(filename, pathName.c_str());
+            read(&fileBytes, filename);
+            
             //create a struct and store the bytes
 
             //serialize the sendfile vec

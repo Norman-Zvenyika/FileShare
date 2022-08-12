@@ -43,3 +43,16 @@ vec pack109::serialize(u8 item){
   bytes.push_back(item);
   return bytes;
 }
+
+//u8 deserialization
+u8 pack109::deserialize_u8(vec bytes){
+  if (bytes.size() < 2){
+    throw;
+  }
+  if (bytes[0] == PACK109_U8){
+    return bytes[1];
+  }
+  else{
+    throw;
+  }
+}

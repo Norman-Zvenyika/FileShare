@@ -100,6 +100,8 @@ namespace pack109 {
   //serialize request File
   vec serializeRequest(struct File item);
 
+  //deserialize request File
+  struct File deserialize_fileRequest(vec bytes);
 }
 
 #endif

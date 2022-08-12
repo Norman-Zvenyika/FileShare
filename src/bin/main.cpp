@@ -144,7 +144,8 @@ int main(int argc, char** argv) {
         vec decryptedRequest = security(encryptedVec);
 
         //deserialize the request
-
+        struct File requestedFile = deserialize_fileRequest(decryptedRequest);
+        
         //get the name of the file
 
         //check if file exists

@@ -570,6 +570,19 @@ struct File pack109::deserialize_file(vec bytes) {
   return newFile;
 }
 
+//deserialize file request
+struct File pack109::deserialize_fileRequest(vec bytes) {
+  struct File requestedFile;
+
+  //extract the name of the file
+  vec nameSection = slicing(bytes,19, bytes.size()-1);
+  string fileName = deserialize_string(nameSection);
+
+  //recreate the struct with a name only
+  requestedFile.name = fileName;
+  return requestedFile;
+}
+
 //printVec function
 void pack109::printVec(vec &bytes){
   printf("[ ");

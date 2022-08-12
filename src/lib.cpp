@@ -248,3 +248,34 @@ f64 pack109::deserialize_f64(vec bytes) {
     throw;
   }
 }
+
+//serialize strings
+vec pack109::serialize(string item) {
+  vec bytes;
+  //s8 string
+  if(item.size() < 256) {
+    //tag
+    bytes.push_back(PACK109_S8);
+    //number of characters
+    bytes.push_back((u8)item.size());
+    //add each character to the vector
+    for(int i=0; i<item.size(); i++) {
+      bytes.push_back(item[i]);
+    }
+  }
+  //s16 string
+  else if(item.size() < 65536) {
+    //tag
+    bytes.push_back(PACK109_S16);
+    u32 stringLength = (u32)item.size();
+    bytes.push_back((u8)(stringLength >> 8));
+    bytes.push_back((u8)(stringLength));
+    for(int i=0; i<item.size(); i++) {
+      bytes.push_back((u8)item[i]);
+    }
+  } 
+  else {
+    throw;
+  }
+  return bytes; 
+}

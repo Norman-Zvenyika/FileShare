@@ -389,3 +389,22 @@ vec pack109::serialize(std::vector<u64> item) {
   }
   return bytes;
 }
+
+//deserialize vector<u64>
+std::vector<u64> pack109::deserialize_vec_u64(vec bytes) {
+  std::vector<u64> result;
+  if(bytes[0] == PACK109_A8) {
+    for(int i= 2; i <(bytes[1]*9)+2; i +=9) {
+      u64 element = deserialize_u64(slicing(bytes,i,i+9));
+      result.push_back(element);
+    }
+  }
+  else if(bytes[0] == PACK109_A16) {
+    int bytesLength = 9 * (int)((bytes[1] << 8) | bytes[2]);
+    for(int i = 2; i < bytesLength+2; i+=9) {
+      u64 element = deserialize_u64(slicing(bytes, i+1, i+9));
+      result.push_back(element);
+    }
+  }
+  return result;
+}

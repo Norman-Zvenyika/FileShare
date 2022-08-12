@@ -9,6 +9,23 @@
 using namespace pack109;
 using namespace std;
 
+// for string delimiter
+//https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+vector<string> split (string s, string delimiter) {
+    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+    string token;
+    vector<string> res;
+
+    while ((pos_end = s.find (delimiter, pos_start)) != string::npos) {
+        token = s.substr (pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back (token);
+    }
+
+    res.push_back (s.substr (pos_start));
+    return res;
+}
+
 int main(int argc, char** argv) {
     //declare variables
     bool hostNamePresent = false;
@@ -22,8 +39,17 @@ int main(int argc, char** argv) {
         cout << "Usage: --hostname address:port" << endl;
         exit(1);
     }
-    
+
     //parse the input arguments
+    for(int i=0; i <argc; i++) {
+        if(strcmp(argv[i], "--hostname")==0) {
+            string hostNameWPort = argv[i+1];
+            vector<string> v1 = split(hostNameWPort, ":");
+            address = v1[0];
+            portString = v1[1];
+            hostNamePresent = true;
+        }
+    }
 
     //check if host name is present
 

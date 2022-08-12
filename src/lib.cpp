@@ -200,3 +200,21 @@ vec pack109::serialize(f32 item) {
   }
   return bytes;
 }
+
+//f32 deserialize
+f32 pack109::deserialize_f32(vec bytes){
+  u32 result = 0;
+  if (bytes[0] == PACK109_F32) {
+    int j = (sizeof(u32) * 2) - 2;
+    for(int i=1; i <= sizeof(u32); i++) {
+      u32 shifted = (u32) bytes[i] << j * 4;
+      result = result | shifted;
+      j-=2;
+    }
+    f32 *f32Pointer = (f32*) (&result);  //change the u32 to f32
+    return *f32Pointer;
+  } 
+  else {
+    throw;
+  }
+}

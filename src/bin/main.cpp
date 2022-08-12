@@ -149,7 +149,8 @@ int main(int argc, char** argv) {
     /* Now start listening for the clients, here process will
         * go in sleep mode and will wait for the incoming connection
     */
-    
+    cout << "server listening on :" << address << ":" << portString << endl;
+    cout <<"-------------------------------------------------------------------" << endl;
     listen(sockfd,5);
     clilen = sizeof(cli_addr);
 
@@ -219,7 +220,7 @@ int main(int argc, char** argv) {
             //encrypt the serializedSendFile vec
             vec encrypted = security(serializedFileVec);
 
-            cout << "Sending " << requestedFileName << endl;
+            cout << "Sending \"" << requestedFileName << "\" -- " << encrypted.size() << "bytes" << endl;
 
             //then send file to server
             n = write(newsockfd, static_cast<void*>(encrypted.data()), encrypted.size());
@@ -240,6 +241,7 @@ int main(int argc, char** argv) {
             cout << "File not found: " << requestedFileName << endl;
             cout << "Terminating connection with 127.0.0.1:" << portString << endl;
             cout << "Connection terminated." << endl;
+            cout <<"-------------------------------------------------------------------" << endl;
         }
     }
     else {
@@ -259,6 +261,7 @@ int main(int argc, char** argv) {
         cout << "File stored." << endl;
         cout << "Terminating connection with 127.0.0.1:" << portString << endl;
         cout << "Connection terminated." << endl;
+        cout <<"-------------------------------------------------------------------" << endl;
     }
     
     return 0;

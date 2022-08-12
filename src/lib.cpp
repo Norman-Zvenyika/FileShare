@@ -35,3 +35,11 @@ bool pack109::deserialize_bool(vec bytes){
     throw;
   }
 }
+
+//u8 serialization
+vec pack109::serialize(u8 item){
+  vec bytes;
+  bytes.push_back(PACK109_U8);
+  bytes.push_back(item);
+  return bytes;
+}

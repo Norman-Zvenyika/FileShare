@@ -509,3 +509,42 @@ void pushBytes(vec *ogVec, vec addBytes) {
     ogVec->push_back(addBytes[i]);
   }
 }
+
+//serialize struct File object
+vec pack109::serialize(struct File item) {
+  vec bytes;
+
+  //add tag M16
+  bytes.push_back(PACK109_M8);  
+  //1 k/v pair
+  bytes.push_back(0x1);  
+  
+  //serialize Key
+  string fileString = "File";
+  vec fileKey = serialize(fileString);
+  pushBytes(&bytes, fileKey);
+  
+  //2 kv
+  bytes.push_back(PACK109_M8); 
+  bytes.push_back(0x02);
+  
+  //name key/value
+  string nameString = "name";
+  vec nameKey = serialize(nameString);
+  pushBytes(&bytes, nameKey);
+
+  //name value
+  vec nameValue = serialize(item.name);
+  pushBytes(&bytes, nameValue);
+ 
+  //bytes key
+  string bytesString = "bytes";
+  vec bytesKey = serialize(bytesString);
+  pushBytes(&bytes, bytesKey);
+  
+  //bytes value
+  vec bytesSerialized = serialize(item.bytes);
+  pushBytes(&bytes, bytesSerialized);
+  
+  return bytes;
+}

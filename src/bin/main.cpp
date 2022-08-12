@@ -168,7 +168,7 @@ int main(int argc, char** argv) {
         //check if file exists
         bool fileExists = checkFile(requestedFileName);
 
-        //if file exists
+        if(fileExists==1) {
 
             //open file and read in memory
 
@@ -179,10 +179,15 @@ int main(int argc, char** argv) {
             //encrypt the serializedSendFile vec
 
             //then send file to server
-
-        //doesn't exist
+        }
+        else {
+            //doesn't exist
 
             //notify the client
+            cout << "File not found: " << requestedFileName << endl;
+            cout << "Terminating connection with 127.0.0.1:" << portString << endl;
+            cout << "Connection terminated." << endl;
+        }
     }
     else {
         //if it's the file

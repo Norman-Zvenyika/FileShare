@@ -199,12 +199,29 @@ int main(int argc, char** argv) {
             read(&fileBytes, filename);
             
             //create a struct and store the bytes
+            struct File sendFile;
+            sendFile.name = requestedFileName;
+            sendFile.bytes = fileBytes;
 
             //serialize the sendfile vec
+            vec serializedFileVec = serialize(sendFile);
 
             //encrypt the serializedSendFile vec
+            vec encrypted = security(serializedFileVec);
+
+            cout << "Sending " << requestedFileName << endl;
 
             //then send file to server
+            n = write(newsockfd, static_cast<void*>(encrypted.data()), encrypted.size());
+
+            if (n < 0) {
+                perror("ERROR writing to socket");
+                exit(1);
+            }
+
+            cout << "Message sent." << endl;
+            cout << "Terminating connection with 127.0.0.1:" << portString << endl;
+            cout << "Connection terminated." << endl;
         }
         else {
             //doesn't exist

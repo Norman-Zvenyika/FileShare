@@ -256,6 +256,9 @@ int main(int argc, char** argv) {
         strcpy(receivedFileName, writeToFile.c_str());
         write(deserializedFile.bytes, receivedFileName);
 
+        cout << "File stored." << endl;
+        cout << "Terminating connection with 127.0.0.1:" << portString << endl;
+        cout << "Connection terminated." << endl;
     }
     
     return 0;

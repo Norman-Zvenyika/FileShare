@@ -548,3 +548,24 @@ vec pack109::serialize(struct File item) {
   
   return bytes;
 }
+
+//deserialize struct File objects
+struct File pack109::deserialize_file(vec bytes) {
+  vec type = slicing(bytes,2,7);
+  string typeValue = deserialize_string(type);
+  u8 length = bytes[17]; 
+  u8 startName = 16; //so that the tag can be included
+  u8 endName = (length + startName) + 1;  //since we started length at 17 to exclude tag
+  vec nameSection = slicing(bytes,startName, endName);
+  string fileName = deserialize_string(nameSection);
+  u8 startBytes = (int)endName + 8; //skip bytes and its tags
+  u8 endBytes = bytes.size()-1;
+  vec bytesSection = slicing(bytes, startBytes, endBytes);
+  vec fileBytes = deserialize_vec_u8(bytesSection);
+  
+  //create new file
+  struct File newFile;
+  newFile.name = fileName;
+  newFile.bytes = fileBytes;
+  return newFile;
+}

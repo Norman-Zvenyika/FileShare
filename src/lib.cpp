@@ -86,3 +86,14 @@ u32 pack109::deserialize_u32(vec bytes) {
     throw;
   }
 }
+
+//u64 serialization
+vec pack109::serialize(u64 item) {
+  vec bytes;
+  bytes.push_back(PACK109_U64);
+  for(int i= 7; i>=0;i--) {
+    u64 shifted = item >> (8 * i);
+    bytes.push_back((u8) shifted & 0x00000000000000FF);
+  }
+  return bytes;
+}

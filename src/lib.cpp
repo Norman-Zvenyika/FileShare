@@ -342,3 +342,22 @@ vec slicing(vec &arr, int x, int y) {
   // Return the final sliced vector
   return result;
 }
+
+//deserialize vector <u8>
+std::vector<u8> pack109::deserialize_vec_u8(vec bytes) {
+  std::vector<u8> result;
+  if(bytes[0] == PACK109_A8) {
+    for(int i= 2; i <(bytes[1]*2)+2; i +=2) {
+      u8 element = deserialize_u8(slicing(bytes,i,i+2));
+      result.push_back(element);
+    }
+  }
+  else if(bytes[0] == PACK109_A16) {
+    int bytesLength = 2 * (int)((bytes[1] << 8) | bytes[2]);
+    for(int i = 2; i < bytesLength+2; i+=2) {
+      u8 element = deserialize_u8(slicing(bytes, i+1, i+2));
+      result.push_back(element);
+    }
+  }
+  return result;
+}

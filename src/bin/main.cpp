@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
         * go in sleep mode and will wait for the incoming connection
     */
     cout << "server listening on :" << address << ":" << portString << endl;
-    cout <<"-------------------------------------------------------------------" << endl;
+    cout <<"-----------------------------------" << endl;
     listen(sockfd,5);
     clilen = sizeof(cli_addr);
 
@@ -220,7 +220,7 @@ int main(int argc, char** argv) {
             //encrypt the serializedSendFile vec
             vec encrypted = security(serializedFileVec);
 
-            cout << "Sending \"" << requestedFileName << "\" -- " << encrypted.size() << "bytes" << endl;
+            cout << "Sending \"" << requestedFileName << "\" -- " << encrypted.size() << " bytes" << endl;
 
             //then send file to server
             n = write(newsockfd, static_cast<void*>(encrypted.data()), encrypted.size());
@@ -233,15 +233,16 @@ int main(int argc, char** argv) {
             cout << "Message sent." << endl;
             cout << "Terminating connection with 127.0.0.1:" << portString << endl;
             cout << "Connection terminated." << endl;
+            cout <<"-----------------------------------" << endl;
         }
         else {
             //doesn't exist
 
             //notify the client
-            cout << "File not found: " << requestedFileName << endl;
+            cout << "File not found: \"" << requestedFileName << "\"" << endl;
             cout << "Terminating connection with 127.0.0.1:" << portString << endl;
             cout << "Connection terminated." << endl;
-            cout <<"-------------------------------------------------------------------" << endl;
+            cout <<"-----------------------------------" << endl;
         }
     }
     else {
@@ -261,7 +262,7 @@ int main(int argc, char** argv) {
         cout << "File stored." << endl;
         cout << "Terminating connection with 127.0.0.1:" << portString << endl;
         cout << "Connection terminated." << endl;
-        cout <<"-------------------------------------------------------------------" << endl;
+        cout <<"-----------------------------------" << endl;
     }
     
     return 0;

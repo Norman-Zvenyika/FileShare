@@ -70,16 +70,16 @@ If you call the program without a `--hostname`, it should exit with an error.
 
 The maximum grade for this cut is a **`A (93%)`**.
 
-- Q1-1. The server will start, bind a socket to a port, and listen for a connection.
-- When an connection is established, it will attempt to read a message from the client. The message will either be a `File` message or a `Request` message.
+- Q1-1. The server will start, bind a socket to a port, and listen for a connection. [citation: unix sockest][7] [citation: split arguments function][6]
+- When an connection is established, it will attempt to read a message from the client. The message will either be a `File` message or a `Request` message. [citation: unix sockest][7]
 - The server will service the message in the following steps:
-  - Q1-2. Read the message to a buffer
-  - Q1-3. Decrypt the message
-  - Q1-4 Deserialize the message to the appropriate struct, either a `File` or `Request`.
-    - Q1-5. If the message is a `File`, then the server will save the file to disk in a folder called `received`.
-    - Q1-6. If the message is a `Request`, then the server will look for the requested file in the `received` folder. 
+  - Q1-2. Read the message to a buffer [citation: read function from homework 6][4]
+  - Q1-3. Decrypt the message [citation: security function from homework 6][4]
+  - Q1-4 Deserialize the message to the appropriate struct, either a `File` or `Request`. [citation: lib.cpp and pack109.hpp homework 6][4]
+    - Q1-5. If the message is a `File`, then the server will save the file to disk in a folder called `received`. [citation: homework 6][4]
+    - Q1-6. If the message is a `Request`, then the server will look for the requested file in the `received` folder. [citation: file exist function][5]
       - If the requested file does not exist, nothing will be sent back to the client.
-      - Q1-7. If the file does exist it will be read into memory, serialized into a `File` message, encrypted, and sent to the client.
+      - Q1-7. If the file does exist it will be read into memory, serialized into a `File` message, encrypted, and sent to the client. [citation: lib.hpp and lib.cpp from homework 6][4]
     - After servicing this one message, the file server will exit.
     - If you want to send or request another file from the file server, you must restart the file server so it can service another request.
 
@@ -208,3 +208,7 @@ Include a list of websites and resources you used to complete this exam. Make a 
 [1]: https://www.markdownguide.org/basic-syntax#reference-style-links
 [2]: http://crasseux.com/books/ctutorial/Building-a-library.html#Building%20a%20library
 [3]: https://support.zoom.us/hc/en-us/articles/201362473-Local-recording
+[4]: http://gitlab.cse.lehigh.edu/noz224-cse109/homework-6
+[5]: https://www.tutorialspoint.com/the-best-way-to-check-if-a-file-exists-using-standard-c-cplusplus
+[6]: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+[7]: https://www.tutorialspoint.com/unix_sockets/socket_quick_guide.htm
